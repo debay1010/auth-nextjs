@@ -24,14 +24,13 @@ export default function Signup() {
 			setLoading(true);
 			const response = await axios.post("/api/users/signup", user);
 
-			console.log("Signup Success", response);
-			console.log("Signup Success", response.data);
+			// console.log("Signup Success", response.data);S
+			console.log("Signup Success", response.data.message);
 
-			toast.success("Sign up successful!", { duration: 6000 });
+			toast.success(response.data.message, { duration: 6000 });
 			router.push("/login");
 		} catch (error: any) {
-			console.log("signup failed", error.message);
-			// toast.error("Something went wrong. You can't sign up");
+			console.log("Signup failed:", error.message);
 			toast.error(error.message, { duration: 6000 });
 		} finally {
 			setLoading(false);
