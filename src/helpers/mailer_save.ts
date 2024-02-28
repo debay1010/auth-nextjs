@@ -8,7 +8,6 @@ import bcryptjs from "bcryptjs";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
 	try {
-		console.log(emailType);
 		// Create a hashed token
 		const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
@@ -45,9 +44,9 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 					? "Verify Your Email"
 					: "Reset Your Password",
 			html: `<p> Click
-                <a href="${process.env.DOMAIN}/${
-				emailType === "VERIFY" ? "verifyemail" : "forgot-password"
-			}?token=${hashedToken}"> here</a> to 
+                <a href="${
+					process.env.DOMAIN
+				}/verifyemail?token=${hashedToken}"> here</a> to 
                 ${
 					emailType === "VERIFY"
 						? "Verify your email"
@@ -55,9 +54,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 				}
 
                 or copy and paste the link below on your browser <br>
-                ${process.env.DOMAIN}/${
-				emailType === "VERIFY" ? "verifyemail" : "forgot-password"
-			}?token=${hashedToken}
+                ${process.env.DOMAIN}/verifyemail?token=${hashedToken}
         </p>`,
 		};
 

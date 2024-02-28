@@ -4,7 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-// import Router from "next/router";
 
 export default function Signup() {
 	const router = useRouter();
@@ -19,7 +18,7 @@ export default function Signup() {
 	const [loading, setLoading] = useState(false);
 
 	const onSignup = async (e: any) => {
-		// e.preventDefault();
+		e.preventDefault();
 		try {
 			setLoading(true);
 			const response = await axios.post("/api/users/signup", user);
@@ -53,44 +52,62 @@ export default function Signup() {
 		<div className="card">
 			<h1 className="processing">{loading ? "Processing" : "Sign Up"}</h1>
 			{/* <hr /> */}
-			{/* <form onSubmit={onSignup}> */}
-			<label htmlFor="username">Username</label>
-			<input
-				className="input"
-				type="text"
-				placeholder="Username"
-				value={user.username}
-				onChange={(e) => setUser({ ...user, username: e.target.value })}
-			/>
-			<label htmlFor="email">Email</label>
-			<input
-				className="input"
-				type="email"
-				placeholder="Email"
-				value={user.email}
-				onChange={(e) => setUser({ ...user, email: e.target.value })}
-			/>
-			<label htmlFor="password">Password</label>
-			<input
-				className="input"
-				type="password"
-				placeholder="Password"
-				value={user.password}
-				onChange={(e) => setUser({ ...user, password: e.target.value })}
-			/>
+			<form onSubmit={onSignup}>
+				<label htmlFor="username">Username</label>
+				<input
+					className="input"
+					type="text"
+					placeholder="Username"
+					value={user.username}
+					onChange={(e) =>
+						setUser({ ...user, username: e.target.value })
+					}
+				/>
+				<label htmlFor="email">Email</label>
+				<input
+					className="input"
+					type="email"
+					placeholder="Email"
+					value={user.email}
+					onChange={(e) =>
+						setUser({ ...user, email: e.target.value })
+					}
+				/>
+				<label htmlFor="password">Password</label>
+				<input
+					className="input"
+					type="password"
+					placeholder="Password"
+					value={user.password}
+					onChange={(e) =>
+						setUser({ ...user, password: e.target.value })
+					}
+				/>
 
-			<button onClick={onSignup} className="btn">
-				{/* <button className="btn"> */}
-				{buttonDisabled ? "No Sign Up" : "Sign Up"}
-			</button>
-			<p className="mt-3 text-center">
-				Already registered?{" "}
-				<Link className=" underline" href="/login">
-					{" "}
-					Login
-				</Link>
-			</p>
-			{/* </form> */}
+				{/* <button onClick={onSignup} className="btn"> */}
+
+				{buttonDisabled ? (
+					<button disabled className="btn-disabled">
+						{buttonDisabled ? "Fill the form" : "Sign Up"}
+					</button>
+				) : (
+					<button className="btn">
+						{buttonDisabled ? "Fill the form" : "Sign Up"}
+					</button>
+				)}
+
+				{/* <button className="btn">
+					{buttonDisabled ? "No Sign Up" : "Sign Up"}
+				</button> */}
+
+				<p className="mt-3 text-center">
+					Already registered?{" "}
+					<Link className="hover:underline" href="/login">
+						{" "}
+						Login
+					</Link>
+				</p>
+			</form>
 		</div>
 	);
 }

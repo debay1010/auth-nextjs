@@ -15,7 +15,8 @@ export default function Login() {
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	const onLogin = async () => {
+	const onLogin = async (e: any) => {
+		e.preventDefault();
 		try {
 			setLoading(true);
 
@@ -52,36 +53,63 @@ export default function Login() {
 
 			{/* <h1 className="title">Login</h1> */}
 			<hr />
-			{/* <form> */}
-			<label htmlFor="email">Email</label>
-			<input
-				className="input"
-				type="email"
-				placeholder="Email"
-				value={user.email}
-				onChange={(e) => setUser({ ...user, email: e.target.value })}
-			/>
-			<label htmlFor="password">Password</label>
-			<input
-				// className="block w-full rounded-md p-2 placeholder:text-sm border-0 outline-0 ring-1 ring-indigo-500 focus:ring-2 mb-4"
-				className="input"
-				type="password"
-				placeholder="Password"
-				value={user.password}
-				onChange={(e) => setUser({ ...user, password: e.target.value })}
-			/>
+			<form onSubmit={onLogin}>
+				<label htmlFor="email">Email</label>
+				<input
+					className="input"
+					type="email"
+					placeholder="Email"
+					value={user.email}
+					onChange={(e) =>
+						setUser({ ...user, email: e.target.value })
+					}
+				/>
+				<label htmlFor="password">Password</label>
+				<input
+					// className="block w-full rounded-md p-2 placeholder:text-sm border-0 outline-0 ring-1 ring-indigo-500 focus:ring-2 mb-4"
+					className="input"
+					type="password"
+					placeholder="Password"
+					value={user.password}
+					onChange={(e) =>
+						setUser({ ...user, password: e.target.value })
+					}
+				/>
 
-			<button onClick={onLogin} className="btn">
-				{buttonDisabled ? "No Login" : " Login"}
-			</button>
-			<p className="mt-3 text-center">
-				Not yet registered?{" "}
-				<Link className="underline" href="/signup">
-					{" "}
-					Sign Up
-				</Link>
-			</p>
-			{/* </form> */}
+				{/* <button onClick={onLogin} className="btn"> */}
+
+				{buttonDisabled ? (
+					<button disabled className="btn-disabled">
+						{buttonDisabled ? "Fill the form" : "Sign Up"}
+					</button>
+				) : (
+					<button className="btn">
+						{buttonDisabled ? "Fill the form" : "Sign Up"}
+					</button>
+				)}
+
+				{/* <button type="button" className="btn">
+					{buttonDisabled ? "No Login" : " Login"}
+				</button> */}
+
+				<p className="mt-3 text-center">
+					Not yet registered?{" "}
+					<Link className="hover:underline" href="/signup">
+						{" "}
+						Sign Up
+					</Link>
+				</p>
+				<p className="mt-3 text-center">
+					Forgot your password?{" "}
+					<Link
+						className="hover:underline"
+						href="/email-forgot-password"
+					>
+						{" "}
+						Click here
+					</Link>
+				</p>
+			</form>
 		</div>
 	);
 }

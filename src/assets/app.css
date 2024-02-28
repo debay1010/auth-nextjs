@@ -24,8 +24,14 @@
 	.btn {
 		@apply block w-full bg-indigo-500 text-white rounded-md p-2 active:bg-indigo-600;
 	}
+	.btn-disabled {
+		@apply block w-full bg-indigo-300 text-white rounded-md p-2;
+	}
 	.btn2 {
 		@apply block bg-indigo-500 text-white rounded-md p-2 active:bg-indigo-600 min-w-[200px];
+	}
+	.btn2-disabled {
+		@apply block bg-indigo-300 text-white rounded-md p-2  min-w-[200px];
 	}
 
 	.btn3 {
